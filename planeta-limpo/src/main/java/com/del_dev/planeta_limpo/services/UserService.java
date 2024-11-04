@@ -17,9 +17,13 @@ public class UserService {
     private UserRepository repository;
 
     @Transactional
-    public User criarUsuario(User user){
+    public User criarUsuario(User user) {
+        if (user == null || user.getNome() == null || user.getSenha() == null) {
+            throw new IllegalArgumentException("Usuário ou campos obrigatórios não podem ser nulos");
+        }
         return repository.save(user);
     }
+
     @Transactional
     public List<User> findAll(){
 
